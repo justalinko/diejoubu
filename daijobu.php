@@ -27,6 +27,7 @@ print"
 [$h 3 $n] Auto Injection
 [$h 4 $n] Find Admin
 [$h 5 $n] Auto login & deface
+[$h 6 $n] Dorking Target
 [$h 9 $n] Exit.
 ";
 }
@@ -152,7 +153,7 @@ echo"\033[1;34m @Daijobu/\033[1;32mFindAdmin/\033[1;31mSet Target/ :\033[1;37m";
 echo"\n[".date('H:m:s')."]\033[1;32m RUNNING SCAN... \033[1;34m CTRL+C \033[1;37m For Stop Scanning.. \n\n";
 if(!empty($t)){
 $t=(!preg_match("/^http:|^https:/",$t)) ? "http://".$t : $t=$t;
-$adm=array("adminweb/","webadmin/","redaktur/","paneladmin/","adminpanel/","apanel/","redaksi/","laporan/","sysadmin/","minamin/","minadmin/","timadmin/","padmin/","admin/","pakadmin/","ngadimin/","oalah/");
+$adm=array("adminweb/","webadmin/","redaktur/","paneladmin/","adminpanel/","apanel/","redaksi/","laporan/","sysadmin/","minamin/","minadmin/","timadmin/","padmin/","admin/","pakadmin/","ngadimin/","oalah/","adm/","_adm/","_administrator_/","administrator/","ketua/","sika/","user/","users/","dinkesadmin/","retel/","author/","panel/","paneladmin/","panellogin/","cp-admin/","master/","master/index.php","master/login.php","operator/index.php","sika/index.php","develop/index.php","ketua/index.php","redaktur/index.php","admin/index.php","administrator/index.php","adminweb/index.php","user/index.php","users/index.php","dinkesadmin/index.php","retel/index.php","author/index.php","panel/index.php","paneladmin/index.php","panellogin/index.php","redaksi/index.php","cp-admin/index.php","operator/login.php","sika/login.php","develop/login.php","ketua/login.php","redaktur/login.php","admin/login.php","administrator/login.php","adminweb/login.php","user/login.php","users/login.php","dinkesadmin/login.php","retel/login.php","author/login.php","panel/login.php","paneladmin/login.php","panellogin/login.php","redaksi/login.php","cp-admin/login.php","terasadmin/","terasadmin/index.php","terasadmin/login.php","rahasia/","rahasia/index.php","rahasia/admin.php","rahasia/login.php","dinkesadmin/","dinkesadmin/login.php","adminpmb/","adminpmb/index.php","adminpmb/login.php","system/","system/index.php","system/login.php","webadmin/","webadmin/index.php","webadmin/login.php","wpanel/","wpanel/index.php","wpanel/login.php","adminpanel/index.php","adminpanel/","adminpanel/login.php","adminkec/","adminkec/index.php","adminkec/login.php","admindesa/","admindesa/index.php","admindesa/login.php","adminkota/","adminkota/index.php","adminkota/login.php","admin123/","admin123/index.php","admin123/login.php","logout/","logout/index.php","logout/login.php","logout/admin.php","adminweb_setting",);
 foreach($adm as $a){
 $url=$t."/".$a;
 if(a_nyeken($url,"username|password|adminpanel|login|masuk")){
@@ -184,6 +185,45 @@ echo"[".date('H:m:s')."] \033[1;31m DEFACE FAILED,GOMENNASAI.. \033[1;37m\n";
 }
 }
 
+}elseif ($o=="6") {
+function save($data){
+		$fp = @fopen("dork_daijobu.html", "a") or die("cant open file");
+		fwrite($fp, $data);
+		fclose($fp);
+}
+$list = array();
+$b = 5;
+echo"\033[1;34m @Daijobu/\033[1;32mGooGle/\033[1;31m Input Dork/ :\033[1;37m"; $t=trim(fgets(STDIN));
+$dork = urlencode($t);
+	for($i=0;$i+=$b;$i++){
+		echo"[".date('H:m:s')."] (\033[1;34m$i\033[1;37m) \033[1;32m loading \033[1;37m... \n"; 
+@define('c',curl_init("https://www.google.com/search?q=$dork&btnG=Search&start=$i#q=$dork&start=$i"));
+curl_setopt(c,CURLOPT_RETURNTRANSFER,1);
+curl_setopt(c,CURLOPT_FOLLOWLOCATION,1);
+curl_setopt(c,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
+curl_setopt(c,CURLOPT_SSL_VERIFYPEER,0);
+curl_setopt(c,CURLOPT_SSL_VERIFYHOST,0);
+curl_setopt(c,CURLOPT_COOKIEJAR,"cookie_dork.txt");
+curl_setopt(c,CURLOPT_COOKIEFILE,"cookie_dork.txt");
+$r = curl_exec(c); 
+
+preg_match_all("/style=\"white-space:nowrap\"><c(.*?)\//",$r,$a);
+foreach($a[1] as $s){
+$site = explode("ite class=\"_Rm\">", $s);
+$su = parse_url("http://$site[1]", PHP_URL_HOST);
+if(!in_array($su,$list)){
+	$list[] = $su;
+	echo "[".date('H:m:s')."] $su \n";
+	save("$su<br>");
+	
+
+}
+else{
+	echo "[".date('H:m:s')."] \033[1;31m $su \033[1;37m \n";
+}
+}
+
+}
 }
 }
 
