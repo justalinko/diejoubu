@@ -1,7 +1,0 @@
-[Desktop Entry]
-Terminal=false
-Type=Application
-Name=Daijobu
-Comment=LokomediaCMS Scanner tools
-Exec=gksu "xterm -geometry 110x35 -title 'Daijobu desu.' -e sh -c 'daijobu;exec bash'"
-Icon=/opt/daijobu/daijobu-icon.png
