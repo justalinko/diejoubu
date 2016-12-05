@@ -8,6 +8,7 @@
 | @twitter  : https://twitter.com/alinmansby
 | copyright (c) 2k16 linuxcode.org 
 *************************************************/
+$daijobu_work_dir="/home/kagari/Daijobu/output/";
 function a_cover(){
 @system('clear');
 $n="\033[1;37m";
@@ -76,8 +77,8 @@ curl_setopt(c,CURLOPT_BINARYTRANSFER,1);
 curl_setopt(c,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
 curl_setopt(c,CURLOPT_SSL_VERIFYPEER,0);
 curl_setopt(c,CURLOPT_SSL_VERIFYHOST,0);
-curl_setopt(c,CURLOPT_COOKIEJAR,"output/cookie_daijobu.txt");
-curl_setopt(c,CURLOPT_COOKIEFILE,"output/cookie_daijobu.txt");
+curl_setopt(c,CURLOPT_COOKIEJAR,$GLOBALS['daijobu_work_dir']."/.cookie_daijobu.txt");
+curl_setopt(c,CURLOPT_COOKIEFILE,$GLOBALS['daijobu_work_dir']."/.cookie_daijobu.txt");
 curl_setopt(c,CURLOPT_POST,1);
 curl_setopt(c,CURLOPT_POSTFIELDS,array(
 	"username"=>$username,
@@ -210,7 +211,7 @@ a_o();
 # end elseif 6
 }elseif ($o=="6") {
 function save($data){
-		$fp = @fopen("output/dork_daijobu.html", "a") or die("cant open file");
+		$fp = @fopen($GLOBALS['daijobu_work_dir']."/dork_daijobu-".date('d.m.Y.').".html", "a") or die("cant open file");
 		fwrite($fp, $data);
 		fclose($fp);
 }
@@ -218,6 +219,7 @@ $list = array();
 $b = 5;
 echo"\033[1;34m @Daijobu/\033[1;32mGooGle/\033[1;31m Input Dork/ :\033[1;37m"; $t=trim(fgets(STDIN));
 $dork = urlencode($t);
+$r=rand();
 	for($i=0;$i+=$b;$i++){
 		echo"[".date('H:m:s')."] (\033[1;34m$i\033[1;37m) \033[1;32m loading \033[1;37m... \n"; 
 @define('c',curl_init("https://www.google.com/search?q=$dork&btnG=Search&start=$i#q=$dork&start=$i"));
@@ -226,8 +228,8 @@ curl_setopt(c,CURLOPT_FOLLOWLOCATION,1);
 curl_setopt(c,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
 curl_setopt(c,CURLOPT_SSL_VERIFYPEER,0);
 curl_setopt(c,CURLOPT_SSL_VERIFYHOST,0);
-curl_setopt(c,CURLOPT_COOKIEJAR,"output/cookie_dork.txt");
-curl_setopt(c,CURLOPT_COOKIEFILE,"output/cookie_dork.txt");
+curl_setopt(c,CURLOPT_COOKIEJAR,$GLOBALS['daijobu_work_dir']."/.".$r."-cookie_dork.txt");
+curl_setopt(c,CURLOPT_COOKIEFILE,$GLOBALS['daijobu_work_dir']."/.".$r."-cookie_dork.txt");
 $r = curl_exec(c); 
 
 preg_match_all("/style=\"white-space:nowrap\"><c(.*?)\//",$r,$a);
