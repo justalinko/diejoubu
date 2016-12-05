@@ -75,6 +75,8 @@ sleep 1
 echo -e $h"[+]$n Configuring Daijobu.."
 chmod 777 */*
 mkdir /opt/daijobu
+mkdir /opt/daijobu/output
+chmod 777 -R /opt/daijobu
 cp daijobu.php /opt/daijobu
 cp autorun.sh /usr/bin/daijobu
 chmod 777 /usr/bin/daijobu
