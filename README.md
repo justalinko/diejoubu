@@ -13,7 +13,7 @@ yaitu
 
 # How use :
 
-with terminal or cmd,
-
-$ php filename.php
-C:\xampp\htdocs\ > php filename.php
+root@daijobu:~# git clone https://github.com/alintamvanz/Daijobu.git
+root@daijobu:~# cd Daijobu/v1.2
+root@daijobu:~/Daijobu/v1.2 # chmod 777 * ; ./install
+root@daijobu:~# daijobu
