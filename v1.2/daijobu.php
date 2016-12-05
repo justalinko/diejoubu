@@ -8,7 +8,7 @@
 | @twitter  : https://twitter.com/alinmansby
 | copyright (c) 2k16 linuxcode.org 
 *************************************************/
-$daijobu_work_dir="/home/kagari/Daijobu/output/";
+$daijobu_work_dir="/opt/daijobu/output/";
 function a_cover(){
 @system('clear');
 $n="\033[1;37m";
