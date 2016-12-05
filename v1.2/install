@@ -1,0 +1,87 @@
+#!/bin/bash
+
+#/************************************************
+#| Daijobu - lokomediacms scanner
+#| Codename  : yamete kudasai
+#| Version   : 1.2
+#| Author    : alinko (shutdown57)
+#| @github   : https://github.com/alintamvanz
+#| @twitter  : https://twitter.com/alinmansby
+#| copyright (c) 2k16 linuxcode.org 
+#*************************************************/
+m="\e[1;31m"
+k="\e[1;33m"
+h="\e[1;32m"
+b="\e[1;34m"
+n="\e[0m"
+clear
+DaijobuInstall(){
+echo -e $m
+echo " ________________________      "
+echo "< boom! Daijobu desu ka? >     "
+echo " ------------------------      "
+echo "   \         ,        ,        "
+echo "    \       /(        )'       "
+echo "     \      \ \___   / |       "
+echo "            /- _  '-/  '       "
+echo "           (/\/ \ \   /\       "
+echo "           / /   | '    \      "
+echo "           O O   ) /    |      "
+echo "           '-^--''<     '      "
+echo "          (_.)  _  )   /       "
+echo "           '.___/'    /        "
+echo "             '-----' /         "
+echo "<----.     __ / __   \         "
+echo "<----|====O)))==) \) /====     "
+echo "<----'    '--' ',__'' \        "
+echo "             |        |        "
+echo "              \       /        "
+echo "        ______( (_  / \______  "
+echo "       '  ,-----'   |        \ "
+echo "      '--{__________)        \\/"
+echo -e $n
+
+rootgk=`whoami`
+if [[ $rootgk != "root" ]]; then
+
+	echo -e $h"[+]$n Checking User : `whoami` "$n
+	echo -e $h"You not root,it's script must run by root."
+	exit
+else
+	echo -e $h"[+]$n Checking User : root"
+fi
+sleep 1
+
+which php > /dev/null 2>&1
+if [[ "$?" -eq "0" ]]; then
+	echo -e $h"[+]$n Checking PHP :$b Installed."$n
+	else
+	echo -e $h"[-]$n Checking PHP :$b Not Installed."$n
+	echo "Installing Please wait.. You must online now."
+	sudo apt-get install php && sudo apt-get install php-curl && sudo apt-get install php-cli
+	DaijobuInstall
+fi
+sleep 1
+which curl > /dev/null 2>&1
+if [[ "$?" -eq "0" ]]; then
+	echo -e $h"[+]$n Checking CURL :$b Installed."$n
+	else
+	echo -e $h"[+]$n Checking CURL :$b Not Installed."$n
+	echo "Installing Please wait.. You must online now"
+	sudo apt-get install curl
+	DaijobuInstall
+fi
+sleep 1
+echo -e $h"[+]$n Configuring Daijobu.."
+chmod 777 */*
+mkdir /opt/daijobu
+cp daijobu.php /opt/daijobu
+cp autorun.sh /usr/bin/daijobu
+chmod 777 /usr/bin/daijobu
+sleep 1
+echo -e $h"[+]$n Creating Desktop icon.."
+cp desktop/daijobu.desktop /usr/share/applications/
+cp desktop/daijobu-icon.png /opt/daijobu
+sleep 1
+}
+DaijobuInstall
