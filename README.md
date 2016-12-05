@@ -12,8 +12,9 @@ yaitu
 # Needed Installation php-cli & php-curl
 
 # How use :
-
+<pre>
 root@daijobu:~# git clone https://github.com/alintamvanz/Daijobu.git
 root@daijobu:~# cd Daijobu/v1.2
 root@daijobu:~/Daijobu/v1.2 # chmod 777 * ; ./install
 root@daijobu:~# daijobu
+</pre>
