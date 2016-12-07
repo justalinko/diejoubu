@@ -8,7 +8,7 @@
 | @twitter  : https://twitter.com/alinmansby
 | copyright (c) 2k16 linuxcode.org 
 *************************************************/
-$daijobu_work_dir="/opt/daijobu/output/";
+$daijobu_work_dir="/home/kagari/Daijobu/output/";
 function a_cover(){
 @system('clear');
 $n="\033[1;37m";
@@ -21,6 +21,7 @@ print"
 /_  __/____/ / $m  / /_/ / /_/ / / / / /_/ / /_/ / /_/ /  $n / /____/_  __/
  /_/      / / $m  /_____/\__,_/_/_/ /\____/_.___/\__,_/ $n _/ /      /_/   
          /__/$m                /___/                   $n /__/             
+                     $n #!$h lokomediacms scanner$n #!
 
        +------===[$h Codename   :$n Yamete kudasai.
         +-----===[$h Version    :$n 1.2
@@ -34,6 +35,7 @@ print"
 [$h 4 $n] Find Admin
 [$h 5 $n] Auto login & deface
 [$h 6 $n] Dorking Target
+[$h 7 $n] Scan Directory
 [$h 9 $n] Exit.
 ";
 }
@@ -251,7 +253,27 @@ else{
 }
 a_cover();
 a_o();
-# end elseif 9
+# end elseif 6
+}elseif($o=="7"){
+echo"\033[1;34m @Daijobu/\033[1;32mScanDir/\033[1;31mSet Target/ :\033[1;37m"; $t=trim(fgets(STDIN));
+if(!empty($t)){
+$t=(!preg_match("/^http:|^https:/",$t)) ? "http://".$t : $t=$t;
+$dir=array("adminweb/","foto_banner/","config/","conter/","files/","foto_berita/","foto_info/","img_album/","img_galeri/","kcfinder/","smiley/","templates/","tinymcpuk/","config/class_paging.php","config/fungsi_autolink.php","config/fungsi_badword.php","config/fungsi_combobox.php","config/fungsi_indotgl.php","config/fungsi_kalender.php","config/fungsi_seo.php","config/fungsi_thumb.php","config/fungsi_validasi.php","config/koneksi.php","config/library.php","adminweb/images","adminweb/modul","adminweb/cek_login.php","adminweb/class_paging.php","adminweb/content.php","adminweb/error-login.php","adminweb/index.php","adminweb/logout.php","adminweb/media.php","adminweb/menu.php","adminweb/style.css","adminweb/style_login.css","adminweb/timeout.php","kcfinder/core/","kcfinder/doc/","kcfinder/integration/","kcfinder/js/","kcfinder/lang/","kcfinder/lib/","kcfinder/themes/","kcfinder/tpl/","kcfinder/upload/","kcfinder/browse.php","kcfinder/config.php","kcfinder/css.php","kcfinder/js_localize.php","kcfinder/upload.php","/tinymcpuk/gambar/","/tinymcpuk/jscripts/");
+foreach ($dir as $d) {
+$url=$t."/".$d;
+if(a_nyeken($url,"404|Error|Not Found|Tidak di temukan")){
+	echo"[".date('H:m:s')."] \033[1;34m $url -> \033[1;31m UNAVAILABLE  \033[1;37m\n";
+}else{
+echo"[".date('H:m:s')."] \033[1;34m $url -> \033[1;32m AVAILABLE  \033[1;37m\n";
+
+}
+}
+}else{
+	a_cover();
+	a_o();
+}
+a_cover();
+a_o();
 }elseif ($o=="9") {
 	print "\n\n [-] Exiting program...";
 	@system('clear ; sleep 3 ; exit');
