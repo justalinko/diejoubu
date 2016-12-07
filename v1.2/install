@@ -15,33 +15,8 @@ h="\e[1;32m"
 b="\e[1;34m"
 n="\e[0m"
 clear
-DaijobuInstall(){
-echo -e $m
-echo " ________________________      "
-echo "< boom! Daijobu desu ka? >     "
-echo " ------------------------      "
-echo "   \         ,        ,        "
-echo "    \       /(        )'       "
-echo "     \      \ \___   / |       "
-echo "            /- _  '-/  '       "
-echo "           (/\/ \ \   /\       "
-echo "           / /   | '    \      "
-echo "           O O   ) /    |      "
-echo "           '-^--''<     '      "
-echo "          (_.)  _  )   /       "
-echo "           '.___/'    /        "
-echo "             '-----' /         "
-echo "<----.     __ / __   \         "
-echo "<----|====O)))==) \) /====     "
-echo "<----'    '--' ',__'' \        "
-echo "             |        |        "
-echo "              \       /        "
-echo "        ______( (_  / \______  "
-echo "       '  ,-----'   |        \ "
-echo "      '--{__________)        \\/"
-echo -e $n
-
-rootgk=`whoami`
+DaijobuCekroot(){
+		rootgk=`whoami`
 if [[ $rootgk != "root" ]]; then
 
 	echo -e $h"[+]$n Checking User : `whoami` "$n
@@ -50,6 +25,9 @@ if [[ $rootgk != "root" ]]; then
 else
 	echo -e $h"[+]$n Checking User : root"
 fi
+}
+DaijobuInstall(){
+DaijobuCekroot
 sleep 1
 
 which php > /dev/null 2>&1
@@ -85,5 +63,63 @@ echo -e $h"[+]$n Creating Desktop icon.."
 cp desktop/daijobu.desktop /usr/share/applications/
 cp desktop/daijobu-icon.png /opt/daijobu
 sleep 1
+echo -e $h"[+]$n INSTALL FINISHED.."
+
 }
+DaijobuUninstall(){
+DaijobuCekroot
+echo -e $m"[-]$n Removing : Desktop icon.."
+rm /usr/share/applications/daijobu.desktop
+sleep 1
+echo -e $m"[-]$n Removing : Configuration files.."
+rm /opt/daijobu/output/*
+rmdir /opt/daijobu/output
+rm /opt/daijobu/*
+rmdir /opt/daijobu
+sleep 1
+echo -e $m"[-]$n Removing : /usr/bin/daijobu... "
+rm /usr/bin/daijobu
+sleep 1
+echo -e $m"[-]$n UNINSTALL FINISHED~"
+}
+echo -e $m
+echo " ________________________      "
+echo "< boom! Daijobu desu ka? >     "
+echo " ------------------------      "
+echo "   \         ,        ,        "
+echo "    \       /(        )'       "
+echo "     \      \ \___   / |       "
+echo "            /- _  '-/  '       "
+echo "           (/\/ \ \   /\       "
+echo "           / /   | '    \      "
+echo "           O O   ) /    |      "
+echo "           '-^--''<     '      "
+echo "          (_.)  _  )   /       "
+echo "           '.___/'    /        "
+echo "             '-----' /         "
+echo "<----.     __ / __   \         "
+echo "<----|====O)))==) \) /====     "
+echo "<----'    '--' ',__'' \        "
+echo "             |        |        "
+echo "              \       /        "
+echo "        ______( (_  / \______  "
+echo "       '  ,-----'   |        \ "
+echo "      '--{__________)        \\/"
+echo -e $n
+
+case $1 in
+	"--install" )
 DaijobuInstall
+		;;
+	"--uninstall")
+DaijobuUninstall
+        ;;
+        *)
+echo  " USAGE : ./install <OPTIONS> "
+echo  "--install     : for installing dajobu~"
+echo  "--uninstall   : for uninstall daijobu~"
+echo  "examples :"
+echo  " ./install --install"
+
+esac
+
